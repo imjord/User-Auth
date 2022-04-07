@@ -13,6 +13,12 @@ const UserController = {
             })
     },
 
+    // get single user
+
+    getSingleUser(req,res){
+        User.findById({_id: req.params.id}).then(data=> res.json(data));
+    },
+
     createUsers(req,res){
         const newUser = new User({
             username: req.body.username,
@@ -21,7 +27,14 @@ const UserController = {
         })
 
         newUser.save().then(savedData => res.send(savedData))
-    }
+    },
+
+    // delete user 
+    deleteUser(req,res){
+        User.deleteOne({_id: req.params.id}, {new: true}).then(data => res.json(data));
+    },
+
+
 
 
 
